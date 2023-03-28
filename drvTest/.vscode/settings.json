@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "kdev_t.h": "c",
+    "device.h": "c",
+    "fs.h": "c"
+  }
+}
