@@ -1,0 +1,26 @@
+#!/bin/sh
+
+GR=fsa
+
+WAIT_DELAY=5
+IF="timeout 0.3 ping -c 1 ftp.he-arc.ch"
+
+printf "%s" "waiting for ftp.he-arc.ch ..."
+
+wait=${WAIT_DELAY}
+while [ ${wait} -gt 0 ]; do
+	${IF}
+	ret=$?
+	if [ $ret -eq 0 ]; then
+		ifconfig eth0 | awk '/inet / { print $2 }' > /home/rpi/$GR.txt
+		lftp -e "set ftp:ssl-allow off; put -O . /home/rpi/$GR.txt; bye" -u linemb,dsljfij#fr66SaFrw ftp.he-arc.ch
+		printf "\nDone\n"
+		break;
+	fi
+	sleep 1
+	printf "."
+	: $((wait--))
+done
+printf "End\n"
+
+
