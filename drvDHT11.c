@@ -1,4 +1,14 @@
-
+/**
+ * @file   drvDHT11.c
+ * @author FSA
+ * @date   05.05.2023
+ * @version 0.3
+ * @brief   Fonctions for DHT11 driver
+ *
+ * Use the fonctionn "read40bits(uint8_t *data, int gpio)" to
+ * get data from the DHT11 device
+ *
+ */
 
 #define GPIO_1W_PIN 4
 
@@ -165,4 +175,5 @@ int8_t read40bits(uint8_t *data, int gpio)
 	//pr_info("%02x;%02x;%02x;%02x;%02x\n", data[0], data[1], data[2], data[3], byte);
 	return ret;
 }
+
 
