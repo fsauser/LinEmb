@@ -163,7 +163,7 @@ int8_t read40bits(uint8_t *data, int gpio)
 			for (i = 7; i >= 0; i--) 
 			{
 				temp = readBit(gpio);
-				byte = data | (temp << i);
+				byte = byte | (temp << i);
 			}
 			data[j]=byte;
 		}
