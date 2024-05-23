@@ -137,13 +137,13 @@ static int __init drvThreadIRQ_init(void)
   gpio_direction_input(GPIO_IN);
   inputsIrq = gpio_to_irq(GPIO_IN);
 
-  if (request_threaded_irq( inputsIrq,                  //IRQ number
-                            (void *)irq_handler,        //IRQ handler (Top half)
-                            irq_thread_fn,              //IRQ Thread handler (Bottom half)
-                            IRQF_TRIGGER_RISING         //Handler will be called in raising edge
+  if (request_threaded_irq( inputsIrq,            // IRQ number
+                            (void *)irq_handler,  // IRQ handler (Top half)
+                            irq_thread_fn,        // IRQ Thread handler (Bottom half)
+                            IRQF_TRIGGER_RISING   
                             | IRQF_ONESHOT,
-                            "IRQ",                      //used to identify the device name using this IRQ
-                            NULL))                      //device id for shared IRQ
+                            "IRQ",
+                            NULL))
   {
     pr_err("ERROR: IRQ request\n");
     goto r_gpio;
