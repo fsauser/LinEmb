@@ -1,0 +1,50 @@
+image boot.vfat {
+	vfat {
+		files = {
+			#BOOT_FILES#
+		}
+		
+		/*
+		file "overlays/testoverlay.dtbo" {
+			image = "../../pi-config/board/rpi4/boot/overlays/testoverlay.dtbo"
+		}
+		*/
+		file "overlays/my_gpio.dtbo" {
+			image = "my_gpio.dtbo"
+		}		
+	}
+
+	size = 32M
+}
+
+image pi-home.vfat {
+	name = "pi-home.vfat"
+	vfat {
+/*		file ".test" {
+			image = "../../pi-config/board/hearc/rpi5/.test"
+		}*/
+	}
+	empty = true
+	size = 128M
+}
+
+image sdcard.img {
+	hdimage {
+	}
+
+	partition boot {
+		partition-type = 0xC
+		bootable = "true"
+		image = "boot.vfat"
+	}
+
+	partition rootfs {
+		partition-type = 0x83
+		image = "rootfs.ext4"
+	}
+	partition pi-home.vfat {
+		partition-type = 0xC
+		image  = "pi-home.vfat"
+	}
+
+}
